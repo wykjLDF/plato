@@ -11,6 +11,7 @@ https://chuanting.github.io/assets/pdf/ieee_infocom_2021.pdf
 from collections import OrderedDict
 
 from plato.servers import fedavg
+from examples.fedatt import fedatt_server
 
 import torch
 import torch.nn.functional as F
@@ -19,16 +20,26 @@ import copy
 from sklearn import cluster, metrics
 
 
-class Server(fedavg.Server):
+class Server(fedatt_server.Server):
     """A federated learning server using the FedDA algorithm."""
     async def federated_averaging(self, updates):
         """Aggregate weight updates from the clients using FedDA."""
         # intra-cluster model aggregation
         # inter-cluster model aggregation
-        return
+        
+        # Extract weights from the updates
+        weights_received = self.extract_client_updates(updates)
+
+        # Extract baseline model weights
+        baseline_weights = self.algorithm.extract_weights()
+        
+        # Update server weights
+        update = self.avg_att(baseline_weights, weights_received)
+
+        return update
 
 
-    """A iterative clustering strategy for BSs based on both the geo-locations and the traffic patterns."""
+    """An iterative clustering strategy for BSs based on both the geo-locations and the traffic patterns."""
     def clustering(self, data, lng, lat, n_clusters=16, n_bs=100, pattern="tp"):
         df_ori = copy.deepcopy(data)
         # Initialization 

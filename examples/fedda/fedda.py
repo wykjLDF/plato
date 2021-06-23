@@ -10,7 +10,7 @@ https://chuanting.github.io/assets/pdf/ieee_infocom_2021.pdf
 """
 import os
 
-os.environ['config_file'] = 'fedda_MNIST_lenet5.yml'
+os.environ['config_file'] = 'examples/fedda/fedda_MNIST_lenet5.yml'
 
 import fedda_server
 
