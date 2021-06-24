@@ -60,6 +60,6 @@ class Server(fedavg.Server):
                 delta = update[name]
                 att_weight += torch.mul(weight - delta, atts[name][i])
 
-            att_update[name] = weight - torch.mul(att_weight, epsilon) + torch.mul(torch.randn(weight.shape), dp)
+            att_update[name] = - torch.mul(att_weight, epsilon) + torch.mul(torch.randn(weight.shape), dp)
 
         return att_update
