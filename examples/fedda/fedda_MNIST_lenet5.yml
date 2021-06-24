@@ -1,7 +1,4 @@
 clients:
-    # Type
-    type: simple
-
     # The total number of clients
     total_clients: 3
 
@@ -32,9 +29,6 @@ data:
     random_seed: 1
 
 trainer:
-    # The type of the trainer
-    type: basic
-
     # The maximum number of training rounds
     rounds: 5
 
@@ -48,15 +42,13 @@ trainer:
     target_accuracy: 0.94
 
     # Number of epoches for local training in each communication round
-    epochs: 5
-    batch_size: 32
+    epochs: 1
+    batch_size: 20
     optimizer: SGD
     learning_rate: 0.01
     momentum: 0.9
     weight_decay: 0.0
-
-    # The machine learning model
-    model_name: lenet5
+    loss_criterion: MSELoss
 
 algorithm:
     # Aggregation algorithm

@@ -51,7 +51,7 @@ class Server(fedavg.Server):
                 delta = update[name]
                 atts[name][i] = torch.linalg.norm(weight - delta)
         
-        for name, weight in baseline_weights.items():
+        for name in baseline_weights.keys():
             atts[name] = F.softmax(atts[name], dim=0)
 
         for name, weight in baseline_weights.items():
